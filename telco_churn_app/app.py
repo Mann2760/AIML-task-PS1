@@ -34,15 +34,16 @@ if st.button("Predict Churn"):
         senior, partner, dependents, phone, multiple,
         internet, security, backup, device, tech,
         tv, movies, contract, paperless, payment,
-        monthly, tenure months scaled, total charges scaled
+        monthly, 'Tenure Months Scaled': tenure,
+    'Total Charges Scaled': total
     ]], columns=[
         'Senior Citizen','Partner','Dependents','Phone Service',
         'Multiple Lines','Internet Service','Online Security',
         'Online Backup','Device Protection','Tech Support',
         'Streaming TV','Streaming Movies','Contract',
         'Paperless Billing','Payment Method',
-        'Monthly Charges','Tenure Months Scaled',
-        'Total Charges Scaled'
+        'Monthly Charges','Tenure',
+        'Total'
     ])
 
     # Scale only what you scaled in training
