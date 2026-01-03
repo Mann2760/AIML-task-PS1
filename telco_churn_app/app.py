@@ -25,16 +25,16 @@ contract = st.number_input("Contract (encoded)", 0)
 paperless = st.number_input("Paperless Billing (0 or 1)", 0, 1)
 payment = st.number_input("Payment Method (encoded)", 0)
 
-monthly = st.number_input("Monthly Charges", 0.0)
-tenure = st.number_input("Tenure Months", 0)
-total = st.number_input("Total Charges", 0.0)
+tenure = st.number_input("Tenure (Months)", min_value=0)
+monthly_charges = st.number_input("Monthly Charges", min_value=0.0)
+total_charges = st.number_input("Total Charges", min_value=0.0)
 
 if st.button("Predict Churn"):
     df = pd.DataFrame([[ 
         senior, partner, dependents, phone, multiple,
         internet, security, backup, device, tech,
         tv, movies, contract, paperless, payment,
-        monthly, tenure, total
+        monthly, tenure months scaled, total charges scaled
     ]], columns=[
         'Senior Citizen','Partner','Dependents','Phone Service',
         'Multiple Lines','Internet Service','Online Security',
