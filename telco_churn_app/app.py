@@ -3,8 +3,8 @@ import pandas as pd
 import joblib
 
 # Load model & scaler
-model = joblib.load("churn_model.pkl")
-scaler = joblib.load("scaler.pkl")
+model = joblib.load("telco_churn_app/churn_model.pkl")
+scaler = joblib.load("telco_churn_app/scaler.pkl")
 
 st.title("Telco Churn Prediction App")
 
