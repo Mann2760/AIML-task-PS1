@@ -46,9 +46,7 @@ if st.button("Predict Churn"):
     ])
 
     # Scale only what you scaled in training
-    df[['Tenure Months Scaled','Total Charges Scaled']] = scaler.transform(
-        df[['Tenure Months Scaled','Total Charges Scaled']]
-    )
+    
 
     prob = model.predict_proba(df)[0][1]
     st.success(f"Churn Probability: {round(prob*100,2)}%")
