@@ -67,7 +67,7 @@ if st.button("Predict Churn"):
 
 
 
-   prediction = model.predict(final_df)
+prediction = model.predict(final_df)
 
 if prediction[0] == 1:
     st.error("⚠️ Customer is likely to churn")
