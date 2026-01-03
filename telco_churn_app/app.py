@@ -30,21 +30,35 @@ monthly_charges = st.number_input("Monthly Charges", min_value=0.0)
 total_charges = st.number_input("Total Charges", min_value=0.0)
 
 if st.button("Predict Churn"):
-    df = pd.DataFrame([[ 
-        senior, partner, dependents, phone, multiple,
-        internet, security, backup, device, tech,
-        tv, movies, contract, paperless, payment,
-        monthly, 'Tenure Months Scaled': tenure,
-    'Total Charges Scaled': total
-    ]], columns=[
-        'Senior Citizen','Partner','Dependents','Phone Service',
-        'Multiple Lines','Internet Service','Online Security',
-        'Online Backup','Device Protection','Tech Support',
-        'Streaming TV','Streaming Movies','Contract',
-        'Paperless Billing','Payment Method',
-        'Monthly Charges','Tenure',
-        'Total'
-    ])
+    
+    input_df = pd.DataFrame([{
+    'tenure_months': tenure,
+    'total_charges': total_charges
+}])
+    
+    scaled_values = scaler.transform(input_df)
+    final_df = pd.DataFrame([{
+    'Senior Citizen': senior_citizen,
+    'Partner': partner,
+    'Dependents': dependents,
+    'Phone Service': phone_service,
+    'Multiple Lines': multiple_lines,
+    'Internet Service': internet_service,
+    'Online Security': online_security,
+    'Online Backup': online_backup,
+    'Device Protection': device_protection,
+    'Tech Support': tech_support,
+    'Streaming TV': streaming_tv,
+    'Streaming Movies': streaming_movies,
+    'Contract': contract,
+    'Paperless Billing': paperless_billing,
+    'Payment Method': payment_method,
+    'Monthly Charges': monthly_charges,
+    'Tenure Months Scaled': scaled_values[0][0],
+    'Total Charges Scaled': scaled_values[0][1]
+}])
+
+
 
     # Scale only what you scaled in training
     df[['tenure', 'TotalCharges']] = scaler.transform(
@@ -53,5 +67,9 @@ if st.button("Predict Churn"):
 
 
 
-    prob = model.predict_proba(df)[0][1]
-    st.success(f"Churn Probability: {round(prob*100,2)}%")
+   prediction = model.predict(final_df)
+
+if prediction[0] == 1:
+    st.error("⚠️ Customer is likely to churn")
+else:
+    st.success("✅ Customer is not likely to churn")
